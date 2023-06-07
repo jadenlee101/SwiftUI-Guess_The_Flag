@@ -37,16 +37,17 @@ struct ContentView: View {
         .alert(check,isPresented: $showScore) {
             Button("Continue") {askQuestion()}
         } message: {
+            
             Text("Your score is \(score)")
         }
     }
     
     private func tapped (country : Int) {
         if country == correct {
-            check = "Correct"
+            check = "Correct!"
             score += 1
         } else {
-            check = "Incorrect"
+            check = "Incorrect. This is a flag of \(countries[correct])"
             score -= 1
         }
         showScore.toggle()
