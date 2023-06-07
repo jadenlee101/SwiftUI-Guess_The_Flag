@@ -10,6 +10,8 @@ import SwiftUI
 struct ContentView: View {
     @State private var countries = ["Estonia","France", "Germany", "Ireland", "Italy", "Monaco", "Nigeria", "Poland", "Russia", "Spain", "UK", "US"].shuffled()
     @State private var correct = Int.random(in: 0...2)
+    @State private var showScore : Bool = false
+    @State private var check = ""
     
     var body: some View {
         ZStack{
@@ -31,14 +33,25 @@ struct ContentView: View {
             }
             .padding()
         }
+        .alert(check,isPresented: $showScore) {
+            
+        }
     }
     
     private func tapped (country : Int) {
         if country == correct {
-            print ("correct")
+            check = "Correct"
+            askQuestion()
         } else {
-            print ("not correct")
+            check = "Incorrect"
+            //askQuestion()
         }
+        showScore.toggle()
+    }
+    
+    private func askQuestion (){
+        countries.shuffle()
+        correct = Int.random(in: 0...2)
     }
 }
 
